@@ -1,11 +1,5 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import { useLocation } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Typography from "@material-ui/core/Typography";
-
-/* 
-{
+[
+  {
     "name": "Baked Ziti",
     "desc": "This bubbling baked ziti is perfect for feeding a crowd, and it freezes well too.",
     "time": 90,
@@ -25,29 +19,4 @@ import Typography from "@material-ui/core/Typography";
     ],
     "image": "/images/Baked-Ziti.jpg"
   }
-*/
-
-const Recipe = () => {
-  const { state } = useLocation();
-  return (
-    <div>
-      <Navbar />
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        alignItems="center"
-        justifyContent={"center"}
-      >
-        {state.ingredients.map((ingredient) => (
-          // <Typography variant="subtitle1">{ingredient}</Typography>
-          <Grid item xs={12} spacing={1}>
-            {ingredient}
-          </Grid>
-        ))}
-      </Grid>
-    </div>
-  );
-};
-
-export default Recipe;
+]
