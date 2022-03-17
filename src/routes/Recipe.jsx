@@ -1,8 +1,11 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Directions from "../components/Directions";
 import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import CardMedia from "@mui/material/CardMedia";
 
 /* 
 {
@@ -32,20 +35,37 @@ const Recipe = () => {
   return (
     <div>
       <Navbar />
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        alignItems="center"
-        justifyContent={"center"}
-      >
-        {state.ingredients.map((ingredient) => (
-          // <Typography variant="subtitle1">{ingredient}</Typography>
-          <Grid item xs={12} spacing={1}>
-            {ingredient}
-          </Grid>
-        ))}
-      </Grid>
+      <Container>
+        <CardMedia
+          component="img"
+          height="140"
+          image={state.image}
+          alt="Baked Ziti"
+        />
+        <Grid
+          container
+          // spacing={2}
+          marginTop={1}
+          border={1}
+          padding={1}
+          direction="column"
+          alignItems="center"
+          justifyContent={"center"}
+          // style={{ backgroundColor: "#f5f5f5" }}
+        >
+          <Typography variant="h6" xs={12}>
+            Ingredients
+          </Typography>
+
+          {state.ingredients.map((ingredient, index) => (
+            // <Typography variant="subtitle1">{ingredient}</Typography>
+            <Grid container item xs={12} key={index}>
+              {ingredient}
+            </Grid>
+          ))}
+        </Grid>
+        <Directions directions={state.directions} />
+      </Container>
     </div>
   );
 };

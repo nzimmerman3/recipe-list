@@ -9,11 +9,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 const pages = ["Create", "Favorites"];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  let navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -23,8 +25,10 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
+  const [cursor, setCursor] = React.useState("pointer");
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ background: "#f5f5f5", color: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -32,6 +36,9 @@ const Navbar = () => {
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            onClick={() => navigate("/")}
+            onMouseOver={() => setCursor("pointer")}
+            style={{ cursor: cursor }}
           >
             MY RECIPES
           </Typography>
@@ -66,7 +73,14 @@ const Navbar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    navigate(`/${page.toLowerCase()}`);
+                  }}
+                  style={{ color: "black" }}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -77,14 +91,26 @@ const Navbar = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            onMouseOver={() => setCursor("pointer")}
+            style={{ cursor: cursor }}
           >
             MY RECIPES
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              flexDirection: "row-reverse",
+              display: { xs: "none", md: "flex" },
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                style={{ color: "black" }}
+                onClick={() => {
+                  handleCloseNavMenu();
+                  navigate(`/${page.toLowerCase()}`);
+                }}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
