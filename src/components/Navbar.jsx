@@ -93,6 +93,7 @@ const Navbar = () => {
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
             onMouseOver={() => setCursor("pointer")}
             style={{ cursor: cursor }}
+            onClick={() => navigate("/")}
           >
             MY RECIPES
           </Typography>
