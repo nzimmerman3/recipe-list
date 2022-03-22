@@ -35,32 +35,33 @@ const Recipe = () => {
   return (
     <div>
       <Navbar />
+
       <Container>
-        <CardMedia
-          component="img"
-          height="140"
-          image={state.image}
-          alt="Baked Ziti"
-        />
         <Grid
           container
-          // spacing={2}
           marginTop={1}
-          border={1}
           padding={1}
           direction="column"
           alignItems="center"
           justifyContent={"center"}
-          // style={{ backgroundColor: "#f5f5f5" }}
         >
+          <Typography variant="h5" xs={12}>
+            {state.name}
+          </Typography>
+          <CardMedia
+            className="recipe-image"
+            component="img"
+            image={state.image}
+            alt="Baked Ziti"
+          />
+
           <Typography variant="h6" xs={12}>
             Ingredients
           </Typography>
 
           {state.ingredients.map((ingredient, index) => (
-            // <Typography variant="subtitle1">{ingredient}</Typography>
             <Grid container item xs={12} key={index}>
-              {ingredient}
+              - {ingredient}
             </Grid>
           ))}
         </Grid>
