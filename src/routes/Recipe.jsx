@@ -58,12 +58,11 @@ const Recipe = () => {
           <Typography variant="h6" xs={12}>
             Ingredients
           </Typography>
-
-          {state.ingredients.map((ingredient, index) => (
-            <Grid container item xs={12} key={index}>
-              - {ingredient}
-            </Grid>
-          ))}
+          <ul className="recipe-ingredients">
+            {state.ingredients.map((ingredient, index) => (
+              <li key={index}> {ingredient}</li>
+            ))}
+          </ul>
         </Grid>
         <Directions directions={state.directions} />
       </Container>

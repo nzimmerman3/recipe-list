@@ -28,7 +28,7 @@ const Navbar = () => {
   const [cursor, setCursor] = React.useState("pointer");
 
   return (
-    <AppBar position="static" style={{ background: "#f5f5f5", color: "black" }}>
+    <AppBar className="Navbar">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

@@ -2,3 +2,13 @@
   object-fit: cover;
   height: 90vh;
 }
+
+.recipe-ingredients {
+  width: 100%;
+}
+
+AppBar .Navbar {
+  background: #f5f5f5;
+  color: black;
+  position: fixed;
+}

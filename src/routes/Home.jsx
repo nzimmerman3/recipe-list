@@ -8,7 +8,7 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <Grid container spacing={2} marginTop={1}>
+      <Grid container spacing={2} marginTop={8}>
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <Recipe recipe={Recipes[0]} />
         </Grid>
