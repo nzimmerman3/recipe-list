@@ -9,21 +9,13 @@ function Home() {
     <div>
       <Navbar />
       <Grid container spacing={2} marginTop={8}>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Recipe recipe={Recipes[0]} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Recipe recipe={Recipes[0]} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Recipe recipe={Recipes[0]} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Recipe recipe={Recipes[0]} />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Recipe recipe={Recipes[0]} />
-        </Grid>
+        {Recipes.map((recipe, index) => {
+          return (
+            <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+              <Recipe recipe={recipe} />{" "}
+            </Grid>
+          );
+        })}
       </Grid>
     </div>
   );

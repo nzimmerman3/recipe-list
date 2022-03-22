@@ -1,14 +1,20 @@
 .recipe-image {
   object-fit: cover;
-  height: 90vh;
+  height: 80vh;
 }
 
-.recipe-ingredients {
+.recipe-ingredient-list {
   width: 100%;
 }
 
-AppBar .Navbar {
-  background: #f5f5f5;
-  color: black;
-  position: fixed;
+.recipe-ingredient-item {
+  margin-bottom: 1.5vh;
+}
+
+.recipe-ingredients-title {
+  text-align: center;
+}
+
+.recipe-direction {
+  margin-bottom: 2vh;
 }

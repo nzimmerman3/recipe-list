@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Directions from "../components/Directions";
+import Info from "../components/Info";
 import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@mui/material/Container";
 import CardMedia from "@mui/material/CardMedia";
+import { Divider } from "@mui/material";
 
 /* 
 {
@@ -36,7 +38,7 @@ const Recipe = () => {
     <div>
       <Navbar />
 
-      <Container>
+      <Container style={{ marginTop: "13vh" }}>
         <Grid
           container
           marginTop={1}
@@ -45,9 +47,13 @@ const Recipe = () => {
           alignItems="center"
           justifyContent={"center"}
         >
-          <Typography variant="h5" xs={12}>
+          <Typography variant="h4" xs={12} style={{ marginBottom: "2vh" }}>
             {state.name}
           </Typography>
+          <Divider />
+          <Info time={state.time} servings={state.servings} />
+          <Divider />
+
           <CardMedia
             className="recipe-image"
             component="img"
@@ -55,15 +61,28 @@ const Recipe = () => {
             alt="Baked Ziti"
           />
 
-          <Typography variant="h6" xs={12}>
-            Ingredients
-          </Typography>
-          <ul className="recipe-ingredients">
+          <Typography variant="paragraph">{state.desc}</Typography>
+
+          <ul className="recipe-ingredient-list">
+            <Divider />
+
+            <Typography
+              variant="h6"
+              xs={12}
+              className="recipe-ingredients-title"
+            >
+              Ingredients
+            </Typography>
+
             {state.ingredients.map((ingredient, index) => (
-              <li key={index}> {ingredient}</li>
+              <li className="recipe-ingredient-item" key={index}>
+                {ingredient}
+              </li>
             ))}
           </ul>
         </Grid>
+        <Divider />
+
         <Directions directions={state.directions} />
       </Container>
     </div>
