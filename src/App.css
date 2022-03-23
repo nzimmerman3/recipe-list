@@ -5,6 +5,7 @@
 
 .recipe-ingredient-list {
   width: 100%;
+  margin-top: 0;
 }
 
 .recipe-ingredient-item {
@@ -13,6 +14,7 @@
 
 .recipe-ingredients-title {
   text-align: center;
+  margin-top: 1.5vh !important;
 }
 
 .recipe-direction {

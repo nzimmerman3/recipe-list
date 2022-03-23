@@ -8,9 +8,11 @@ const Directions = (props) => {
       <Typography variant="h6" xs={12} className="recipe-ingredients-title">
         Directions
       </Typography>
-      {props.directions.map((direction, index) => (
-        <RecipeDirection key={index} direction={direction} />
-      ))}
+      <ol>
+        {props.directions.map((direction, index) => (
+          <RecipeDirection key={index} direction={direction} />
+        ))}
+      </ol>
     </div>
   );
 };

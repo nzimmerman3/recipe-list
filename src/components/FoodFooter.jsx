@@ -9,7 +9,7 @@ function FoodFooter(props) {
     <CardActions>
       <Grid container spacing={2}>
         <Grid item xs={6} style={{ textAlign: "left" }}>
-          <Button size="small" color="primary">
+          <Button size="small" style={{ color: "black" }}>
             Share
           </Button>
         </Grid>
