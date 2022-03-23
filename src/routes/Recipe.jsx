@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import Directions from "../components/Directions";
 import Info from "../components/Info";
 import { useLocation } from "react-router-dom";
@@ -38,7 +39,7 @@ const Recipe = () => {
     <div>
       <Navbar />
 
-      <Container style={{ marginTop: "13vh" }}>
+      <Container style={{ marginTop: "13vh", marginBottom: "3vh" }}>
         <Grid
           container
           marginTop={1}
@@ -85,6 +86,7 @@ const Recipe = () => {
 
         <Directions directions={state.directions} />
       </Container>
+      <Footer />
     </div>
   );
 };

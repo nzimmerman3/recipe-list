@@ -18,3 +18,43 @@
 .recipe-direction {
   margin-bottom: 2vh;
 }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.footer-clickable {
+  margin: 6px;
+}
+
+.footer-clickable:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.footer-facebook:hover {
+  color: #4267b2;
+}
+
+.footer-twitter:hover {
+  color: #1d9bf0;
+}
+
+.footer-youtube:hover {
+  color: #ff0000;
+}
+
+.footer-instagram:hover {
+  color: #f09433;
+}
+
+.footer-pinterest:hover {
+  color: #e60023;
+}
+
+.footer-title:hover {
+  cursor: pointer;
+}
