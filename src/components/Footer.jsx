@@ -47,7 +47,7 @@ const Footer = () => {
               </Typography>
             </div>
             <div>
-              <Typography>Copyright</Typography>
+              <Typography>Copyright 2022</Typography>
             </div>
           </div>
         </Container>
