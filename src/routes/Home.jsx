@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Recipe from "../components/Recipe";
 import Grid from "@mui/material/Grid";
 import Navbar from "../components/Navbar";
-import Recipes from "../data/recipes.json";
 import Footer from "../components/Footer";
 import { Container } from "@mui/material";
 import axios from "axios";
