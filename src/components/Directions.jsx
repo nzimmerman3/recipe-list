@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 const Directions = (props) => {
   return (
     <div>
-      <Typography variant="h6" xs={12} className="recipe-ingredients-title">
+      <Typography variant="h6" className="recipe-ingredients-title">
         Directions
       </Typography>
       <ol>

@@ -45,12 +45,10 @@ const Recipe = () => {
         </Grid>
 
         <Divider />
-
+        <Typography variant="h6" className="recipe-ingredients-title">
+          Ingredients
+        </Typography>
         <ul className="recipe-ingredient-list">
-          <Typography variant="h6" className="recipe-ingredients-title">
-            Ingredients
-          </Typography>
-
           {state.ingredients.map((ingredient, index) => (
             <li className="recipe-ingredient-item" key={index}>
               {ingredient}
