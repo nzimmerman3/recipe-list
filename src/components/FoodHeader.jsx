@@ -34,9 +34,6 @@ function FoodHeader(props) {
             </Typography>
           </Grid>
         </Grid>
-        <Typography variant="body2" color="text.secondary">
-          {props.recipe.desc}
-        </Typography>
       </CardContent>
     </CardActionArea>
   );

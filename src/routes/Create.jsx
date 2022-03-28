@@ -5,7 +5,7 @@ import RecipeForm from "../components/RecipeForm";
 const Create = () => {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <RecipeForm />
     </div>
   );

@@ -13,6 +13,9 @@ function App() {
       primary: {
         main: "#f5f5f5",
       },
+      form: {
+        main: "#000000",
+      },
     },
     // components: {
     //   MuiContainer: {

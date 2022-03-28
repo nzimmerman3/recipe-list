@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { MenuItem, Button } from "@mui/material";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
     desc: "",
-    time: 15,
+    time: 0,
     unit: "minutes",
-    servings: 1,
+    servings: 0,
     ingredients: [],
     image: "/images/Baked-Ziti.jpg",
     author: {
@@ -19,6 +22,7 @@ const RecipeForm = () => {
     directions: [],
   });
   const [currIngredient, setCurrIngredient] = useState("");
+  const [currDirection, setCurrDirection] = useState("");
 
   const handleNameChange = (event) => {
     event.persist();
@@ -45,7 +49,7 @@ const RecipeForm = () => {
   };
 
   const handleUnitChange = (event) => {
-    event.persist();
+    // event.persist();
     setRecipeInfo((recipeInfo) => ({
       ...recipeInfo,
       unit: event.target.value,
@@ -60,6 +64,22 @@ const RecipeForm = () => {
     }));
   };
 
+  const addIngredient = () => {
+    setRecipeInfo((recipeInfo) => ({
+      ...recipeInfo,
+      ingredients: [...recipeInfo.ingredients, currIngredient],
+    }));
+    setCurrIngredient("");
+  };
+
+  const addDirection = () => {
+    setRecipeInfo((recipeInfo) => ({
+      ...recipeInfo,
+      directions: [...recipeInfo.directions, currDirection],
+    }));
+    setCurrDirection("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -71,72 +91,85 @@ const RecipeForm = () => {
     }
   };
 
-  const addIngredient = () => {
-    setRecipeInfo((recipeInfo) => ({
-      ...recipeInfo,
-      ingredients: [...recipeInfo.ingredients, currIngredient],
-    }));
-    setCurrIngredient("");
-  };
   return (
-    <div className="recipe-form">
-      <form onSubmit={handleSubmit}>
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          name="name"
+    <div className="recipe-form" style={{ marginTop: "14vh" }}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+      >
+        <TextField
+          variant="standard"
           value={recipeInfo.name}
           onChange={handleNameChange}
+          label="Name"
         />
-        <br />
-        <label for="desc">Description:</label>
-        <input
-          type="text"
-          name="desc"
+        <TextField
+          variant="standard"
           value={recipeInfo.desc}
           onChange={handleDescChange}
+          label="Description"
         />
-        <br />
-        <label for="time">Time:</label>
-        <input
+        <TextField
+          variant="standard"
           type="number"
-          name="time"
-          value={recipeInfo.time}
+          value={recipeInfo.time === 0 ? "" : recipeInfo.time}
           onChange={handleTimeChange}
+          label="Time"
         />
-        <select value={recipeInfo.unit} onChange={handleUnitChange} name="unit">
-          <option>Minutes</option>
-          <option>Hours</option>
-          <option>Seconds</option>
-        </select>
-        <br />
-        <label for="servings">Servings:</label>
-        <input
+        <TextField
+          select
+          label="Unit"
+          value={recipeInfo.unit}
+          onChange={handleUnitChange}
+        >
+          <MenuItem value="minutes">Minutes</MenuItem>
+          <MenuItem value="hours">Hours</MenuItem>
+          <MenuItem value="seconds">Seconds</MenuItem>
+        </TextField>
+        <TextField
+          variant="standard"
           type="number"
-          name="servings"
           value={recipeInfo.servings}
           onChange={handleServingsChange}
+          label="Servings"
         />
-        <br />
 
         {recipeInfo.ingredients.map((ingredient) => (
-          <div>
-            {ingredient} <br />
-          </div>
+          <div>{ingredient}</div>
         ))}
-        <label for="ingredient">Ingredients:</label>
-        <input
-          type="text"
-          name="ingredient"
-          value={currIngredient}
-          onChange={(event) => setCurrIngredient(event.target.value)}
-        />
-        <button type="button" onClick={addIngredient}>
-          Add
-        </button>
-        <br />
-        <button type="submit">Submit</button>
-      </form>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <TextField
+            variant="standard"
+            value={currIngredient}
+            onChange={(event) => setCurrIngredient(event.target.value)}
+            label="Ingredient"
+          />
+          <Button variant="outlined" onClick={addIngredient} color="form">
+            Add
+          </Button>
+        </div>
+        {recipeInfo.directions.map((direction) => (
+          <div>{direction}</div>
+        ))}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <TextField
+            variant="standard"
+            value={currDirection}
+            onChange={(event) => setCurrDirection(event.target.value)}
+            label="Direction"
+          />
+          <Button variant="outlined" onClick={addDirection} color="form">
+            Add
+          </Button>
+        </div>
+
+        <Button variant="outlined" onClick={handleSubmit} color="form">
+          Save
+        </Button>
+      </Box>
     </div>
   );
 };
