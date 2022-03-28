@@ -17,15 +17,6 @@ function App() {
         main: "#000000",
       },
     },
-    // components: {
-    //   MuiContainer: {
-    //     styleOverrides: {
-    //       root: {
-    //         marginTop: "20px",
-    //       },
-    //     },
-    //   },
-    // },
   });
   return (
     <ThemeProvider theme={theme}>

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { MenuItem, Button } from "@mui/material";
+import { Button } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
@@ -11,7 +12,6 @@ const RecipeForm = () => {
     name: "",
     desc: "",
     time: 0,
-    unit: "minutes",
     servings: 0,
     ingredients: [],
     image: "/images/Baked-Ziti.jpg",
@@ -21,8 +21,17 @@ const RecipeForm = () => {
     },
     directions: [],
   });
+  const [error, setError] = useState({
+    name: false,
+    desc: false,
+    time: false,
+    servings: false,
+    ingredients: false,
+    directions: false,
+  });
   const [currIngredient, setCurrIngredient] = useState("");
   const [currDirection, setCurrDirection] = useState("");
+  const [submit, setSubmit] = useState(false);
 
   const handleNameChange = (event) => {
     event.persist();
@@ -45,14 +54,6 @@ const RecipeForm = () => {
     setRecipeInfo((recipeInfo) => ({
       ...recipeInfo,
       time: event.target.value,
-    }));
-  };
-
-  const handleUnitChange = (event) => {
-    // event.persist();
-    setRecipeInfo((recipeInfo) => ({
-      ...recipeInfo,
-      unit: event.target.value,
     }));
   };
 
@@ -80,86 +81,152 @@ const RecipeForm = () => {
     setCurrDirection("");
   };
 
-  const handleSubmit = async (e) => {
+  const isValid = () => {
+    return !(
+      error.name ||
+      error.desc ||
+      error.time ||
+      error.servings ||
+      error.ingredients ||
+      error.directions
+    );
+  };
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await axios
-        .post("http://localhost:3001/api", recipeInfo)
-        .then(navigate("/recipe", { state: recipeInfo }));
-    } catch (err) {
-      console.log(err);
-    }
+    setError((currError) => ({
+      ...currError,
+      name: recipeInfo.name === "",
+      desc: recipeInfo.desc === "",
+      time: recipeInfo.time === 0,
+      servings: recipeInfo.servings === 0,
+      ingredients: recipeInfo.ingredients.length === 0,
+      directions: recipeInfo.directions.length === 0,
+    }));
+    setSubmit(true);
   };
 
+  useEffect(async () => {
+    if (isValid() && submit) {
+      try {
+        await axios
+          .post("http://localhost:3001/api", recipeInfo)
+          .then(navigate("/recipe", { state: recipeInfo }));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [error, submit]);
+  const defaultSize = "25ch";
+  const smallSize = "13ch";
+  const fullSize = "66.5ch";
   return (
-    <div className="recipe-form" style={{ marginTop: "14vh" }}>
+    <div
+      className="recipe-form"
+      style={{
+        marginTop: "14vh",
+        maxWidth: "99%",
+      }}
+    >
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
+          "& .MuiTextField-root": { m: 1 },
+          m: 1,
         }}
       >
+        <div>
+          <TextField
+            sx={{ width: defaultSize }}
+            variant="outlined"
+            value={recipeInfo.name}
+            onChange={handleNameChange}
+            label="Recipe"
+            color="form"
+            error={error.name}
+            helperText={error.name ? "Error!" : ""}
+          />
+          <TextField
+            sx={{ width: defaultSize }}
+            variant="outlined"
+            type="number"
+            value={recipeInfo.time === 0 ? "" : recipeInfo.time}
+            onChange={handleTimeChange}
+            label="Time"
+            color="form"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">minutes</InputAdornment>
+              ),
+            }}
+            error={error.time}
+            helperText={error.time ? "Error!" : ""}
+          />
+          <TextField
+            sx={{ width: smallSize }}
+            variant="outlined"
+            type="number"
+            value={recipeInfo.servings === 0 ? "" : recipeInfo.servings}
+            onChange={handleServingsChange}
+            label="Servings"
+            color="form"
+            error={error.servings}
+            helperText={error.servings ? "Error!" : ""}
+          />
+        </div>
+
         <TextField
-          variant="standard"
-          value={recipeInfo.name}
-          onChange={handleNameChange}
-          label="Name"
-        />
-        <TextField
-          variant="standard"
+          sx={{ width: fullSize }}
+          variant="outlined"
           value={recipeInfo.desc}
           onChange={handleDescChange}
           label="Description"
+          color="form"
+          multiline
+          error={error.desc}
+          helperText={error.desc ? "Error!" : ""}
         />
-        <TextField
-          variant="standard"
-          type="number"
-          value={recipeInfo.time === 0 ? "" : recipeInfo.time}
-          onChange={handleTimeChange}
-          label="Time"
-        />
-        <TextField
-          select
-          label="Unit"
-          value={recipeInfo.unit}
-          onChange={handleUnitChange}
-        >
-          <MenuItem value="minutes">Minutes</MenuItem>
-          <MenuItem value="hours">Hours</MenuItem>
-          <MenuItem value="seconds">Seconds</MenuItem>
-        </TextField>
-        <TextField
-          variant="standard"
-          type="number"
-          value={recipeInfo.servings}
-          onChange={handleServingsChange}
-          label="Servings"
-        />
+        <ul>
+          {recipeInfo.ingredients.map((ingredient, index) => (
+            <li key={index} className="form-ingredient-item">
+              {ingredient}
+            </li>
+          ))}
+        </ul>
 
-        {recipeInfo.ingredients.map((ingredient) => (
-          <div>{ingredient}</div>
-        ))}
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextField
-            variant="standard"
+            sx={{ width: fullSize }}
+            variant="outlined"
             value={currIngredient}
             onChange={(event) => setCurrIngredient(event.target.value)}
             label="Ingredient"
+            color="form"
+            error={error.ingredients}
+            helperText={error.ingredients ? "Error!" : ""}
           />
           <Button variant="outlined" onClick={addIngredient} color="form">
             Add
           </Button>
         </div>
-        {recipeInfo.directions.map((direction) => (
-          <div>{direction}</div>
-        ))}
+        <ol>
+          {recipeInfo.directions.map((direction, index) => (
+            <li key={index} className="form-ingredient-item">
+              {direction}
+            </li>
+          ))}
+        </ol>
+
         <div style={{ display: "flex", alignItems: "center" }}>
           <TextField
-            variant="standard"
+            sx={{ width: fullSize }}
+            variant="outlined"
             value={currDirection}
             onChange={(event) => setCurrDirection(event.target.value)}
             label="Direction"
+            color="form"
+            error={error.directions}
+            helperText={error.directions ? "Error!" : ""}
           />
           <Button variant="outlined" onClick={addDirection} color="form">
             Add

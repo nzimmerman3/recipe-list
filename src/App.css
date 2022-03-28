@@ -64,3 +64,8 @@
 .footer-title:hover {
   cursor: pointer;
 }
+
+.form-ingredient-item {
+  margin-left: 1ch;
+  margin-bottom: 1ch;
+}
