@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -8,6 +8,8 @@ import InputAdornment from "@mui/material/InputAdornment";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
     desc: "",
@@ -116,9 +118,11 @@ const RecipeForm = () => {
       }
     }
   }, [error, submit]);
+
   const defaultSize = "25ch";
   const smallSize = "13ch";
   const fullSize = "66.5ch";
+
   return (
     <div
       className="recipe-form"
@@ -189,7 +193,23 @@ const RecipeForm = () => {
         <ul>
           {recipeInfo.ingredients.map((ingredient, index) => (
             <li key={index} className="form-ingredient-item">
-              {ingredient}
+              <div className="form-ingredient-item-container">
+                <div className="form-ingredient-text">{ingredient}</div>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    console.log(index);
+                    setRecipeInfo((currRecipeInfo) => {
+                      currRecipeInfo.ingredients.splice(index, 1);
+                      return currRecipeInfo;
+                    });
+                    forceUpdate();
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
             </li>
           ))}
         </ul>
@@ -212,7 +232,23 @@ const RecipeForm = () => {
         <ol>
           {recipeInfo.directions.map((direction, index) => (
             <li key={index} className="form-ingredient-item">
-              {direction}
+              <div className="form-ingredient-item-container">
+                <div className="form-ingredient-text">{direction}</div>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => {
+                    console.log(index);
+                    setRecipeInfo((currRecipeInfo) => {
+                      currRecipeInfo.directions.splice(index, 1);
+                      return currRecipeInfo;
+                    });
+                    forceUpdate();
+                  }}
+                >
+                  Delete
+                </Button>
+              </div>
             </li>
           ))}
         </ol>
@@ -233,7 +269,7 @@ const RecipeForm = () => {
           </Button>
         </div>
 
-        <Button variant="outlined" onClick={handleSubmit} color="form">
+        <Button variant="outlined" onClick={handleSubmit} color="success">
           Save
         </Button>
       </Box>

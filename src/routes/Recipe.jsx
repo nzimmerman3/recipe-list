@@ -22,7 +22,7 @@ const Recipe = () => {
       try {
         console.log(state);
         await axios
-          .delete("http://localhost:3001/api", { data: { recipe: state } })
+          .delete("http://localhost:3001/api", { data: { recipe: state._id } })
           .then(navigate("/"));
       } catch (err) {
         console.log(err);

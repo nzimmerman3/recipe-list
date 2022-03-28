@@ -69,3 +69,12 @@
   margin-left: 1ch;
   margin-bottom: 1ch;
 }
+
+.form-ingredient-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.form-ingredient-text {
+  width: 61ch;
+}
