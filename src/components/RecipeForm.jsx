@@ -97,10 +97,10 @@ const RecipeForm = () => {
       ...currError,
       name: recipeInfo.name === "",
       desc: recipeInfo.desc === "",
-      time: recipeInfo.time === 0,
-      servings: recipeInfo.servings === 0,
-      ingredients: recipeInfo.ingredients.length === 0,
-      directions: recipeInfo.directions.length === 0,
+      time: !recipeInfo.time,
+      servings: !recipeInfo.servings,
+      ingredients: !recipeInfo.ingredients.length,
+      directions: !recipeInfo.directions.length,
     }));
     setSubmit(true);
   };
