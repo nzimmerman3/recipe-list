@@ -6,6 +6,7 @@ import Recipe from "./routes/Recipe";
 import Favorites from "./routes/Favorites";
 import Create from "./routes/Create";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 function App() {
   const theme = createTheme({
@@ -18,16 +19,23 @@ function App() {
       },
     },
   });
+  console.log(process.env);
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router>
-          <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route path="/recipe" element={<Recipe />}></Route>
-            <Route path="/create" element={<Create />}></Route>
-            <Route path="/favorites" element={<Favorites />}></Route>
-          </Routes>
+          <Auth0Provider
+            domain={process.env.REACT_APP_AUTH0_DOMAIN}
+            clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+            redirectUri={window.location.origin}
+          >
+            <Routes>
+              <Route exact path="/" element={<Home />}></Route>
+              <Route path="/recipe" element={<Recipe />}></Route>
+              <Route path="/create" element={<Create />}></Route>
+              <Route path="/favorites" element={<Favorites />}></Route>
+            </Routes>
+          </Auth0Provider>
         </Router>
       </div>
     </ThemeProvider>

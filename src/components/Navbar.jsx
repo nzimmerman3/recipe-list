@@ -1,3 +1,4 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -10,6 +11,8 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
+import LoginButton from "./Login";
+import LogoutButton from "./Logout";
 
 const pages = ["Create", "Favorites"];
 
@@ -24,6 +27,8 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated);
 
   const [cursor, setCursor] = React.useState("pointer");
 
@@ -84,6 +89,8 @@ const Navbar = () => {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+              <LogoutButton />
             </Menu>
           </Box>
           <Typography
@@ -117,6 +124,8 @@ const Navbar = () => {
                 {page}
               </Button>
             ))}
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+            <LogoutButton />
           </Box>
         </Toolbar>
       </Container>

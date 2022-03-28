@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Container } from "@mui/material";
 import axios from "axios";
+import Recipes from "../data/recipes.json";
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
@@ -18,6 +19,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    setRecipes(Recipes); //just for testing
   }, []);
 
   return (
