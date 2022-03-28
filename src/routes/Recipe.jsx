@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Directions from "../components/Directions";
@@ -6,12 +6,29 @@ import { useLocation } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Container from "@mui/material/Container";
 import CardMedia from "@mui/material/CardMedia";
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { Grid } from "@mui/material";
 import Author from "../components/Author";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Recipe = () => {
+  let navigate = useNavigate();
+
   const { state } = useLocation();
+  const [remove, setRemove] = useState(false);
+  useEffect(async () => {
+    if (remove) {
+      try {
+        console.log(state);
+        await axios
+          .delete("http://localhost:3001/api", { data: { recipe: state } })
+          .then(navigate("/"));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  });
   return (
     <div>
       <Navbar />
@@ -58,6 +75,9 @@ const Recipe = () => {
         <Divider />
 
         <Directions directions={state.directions} />
+        <Button variant="outlined" onClick={() => setRemove(true)} color="form">
+          Delete Recipe
+        </Button>
       </Container>
       <Footer />
     </div>

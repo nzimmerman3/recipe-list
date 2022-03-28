@@ -30,7 +30,7 @@ function FoodHeader(props) {
           </Grid>
           <Grid item xs={6} style={{ textAlign: "right" }}>
             <Typography variant="body2" color="text.primary">
-              Time: {props.recipe.time} {props.recipe.unit}
+              Time: {props.recipe.time} minutes
             </Typography>
           </Grid>
         </Grid>
