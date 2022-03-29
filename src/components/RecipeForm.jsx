@@ -5,19 +5,14 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-<<<<<<< HEAD
-=======
+
 import { useAuth0 } from "@auth0/auth0-react";
->>>>>>> fix
 
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-<<<<<<< HEAD
-=======
   const { user } = useAuth0();
   console.log(user);
->>>>>>> fix
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
