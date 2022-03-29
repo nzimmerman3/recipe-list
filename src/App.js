@@ -8,6 +8,7 @@ import Create from "./routes/Create";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Auth0ProviderWithHistory } from "./components/auth0-provider-with-history";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import Profile from "./routes/Profile";
 
 function App() {
   const theme = createTheme({
@@ -36,6 +37,10 @@ function App() {
               <Route
                 path="/favorites"
                 element={<ProtectedRoute component={Favorites} />}
+              ></Route>
+              <Route
+                path="/profile"
+                element={<ProtectedRoute component={Profile} />}
               ></Route>
             </Routes>
           </Auth0ProviderWithHistory>
