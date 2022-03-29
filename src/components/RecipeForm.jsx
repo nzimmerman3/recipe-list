@@ -10,7 +10,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const { isAuthenticated, user } = useAuth0();
+  const { user } = useAuth0();
+  console.log(user);
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
@@ -113,7 +114,7 @@ const RecipeForm = () => {
     if (isValid() && submit) {
       try {
         await axios
-          .post("http://localhost:3001/api", recipeInfo)
+          .post("http://localhost:3001/api/recipes", recipeInfo)
           .then(navigate("/recipe", { state: recipeInfo }));
       } catch (err) {
         console.log(err);

@@ -5,14 +5,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Container } from "@mui/material";
 import axios from "axios";
-import Recipes from "../data/recipes.json";
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api")
+      .get("http://localhost:3001/api/recipes")
       .then(({ data }) => {
         setRecipes(data);
       })

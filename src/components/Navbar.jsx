@@ -76,6 +76,12 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
+              {isAuthenticated ? (
+                <LogoutButton type="menu" />
+              ) : (
+                <LoginButton type="menu" />
+              )}
+
               {pages.map((page) => (
                 <MenuItem
                   key={page}
@@ -88,7 +94,6 @@ const Navbar = () => {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
-              {isAuthenticated ? <LogoutButton /> : <LoginButton />}
             </Menu>
           </Box>
           <Typography
@@ -109,6 +114,12 @@ const Navbar = () => {
               display: { xs: "none", md: "flex" },
             }}
           >
+            {isAuthenticated ? (
+              <LogoutButton type="expand" />
+            ) : (
+              <LoginButton type="expand" />
+            )}
+
             {pages.map((page) => (
               <Button
                 key={page}
@@ -122,7 +133,6 @@ const Navbar = () => {
                 {page}
               </Button>
             ))}
-            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </Box>
         </Toolbar>
       </Container>
