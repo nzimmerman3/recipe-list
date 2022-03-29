@@ -5,10 +5,12 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const { isAuthenticated, user } = useAuth0();
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
@@ -18,8 +20,8 @@ const RecipeForm = () => {
     ingredients: [],
     image: "/images/Baked-Ziti.jpg",
     author: {
-      image: "/images/Nick-Zimmerman.jpg",
-      name: "",
+      image: user.picture,
+      name: user.name,
     },
     directions: [],
   });

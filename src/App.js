@@ -6,8 +6,10 @@ import Recipe from "./routes/Recipe";
 import Favorites from "./routes/Favorites";
 import Create from "./routes/Create";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Auth0Provider } from "@auth0/auth0-react";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Auth0ProviderWithHistory } from "./components/auth0-provider-with-history";
 
+//TODO https://auth0.com/developers/hub/code-samples/spa/react-javascript/basic-authentication-react-router-6
 function App() {
   const theme = createTheme({
     palette: {
@@ -19,23 +21,24 @@ function App() {
       },
     },
   });
-  console.log(process.env);
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router>
-          <Auth0Provider
-            domain={process.env.REACT_APP_AUTH0_DOMAIN}
-            clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
-            redirectUri={window.location.origin}
-          >
+          <Auth0ProviderWithHistory>
             <Routes>
               <Route exact path="/" element={<Home />}></Route>
               <Route path="/recipe" element={<Recipe />}></Route>
-              <Route path="/create" element={<Create />}></Route>
-              <Route path="/favorites" element={<Favorites />}></Route>
+              <Route
+                path="/create"
+                element={<ProtectedRoute component={Create} />}
+              ></Route>
+              <Route
+                path="/favorites"
+                element={<ProtectedRoute component={Favorites} />}
+              ></Route>
             </Routes>
-          </Auth0Provider>
+          </Auth0ProviderWithHistory>
         </Router>
       </div>
     </ThemeProvider>
