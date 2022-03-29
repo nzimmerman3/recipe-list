@@ -18,6 +18,7 @@ const Recipe = () => {
   const { state } = useLocation();
   const [remove, setRemove] = useState(false);
   useEffect(async () => {
+    console.log("here");
     if (remove) {
       try {
         console.log(state);
