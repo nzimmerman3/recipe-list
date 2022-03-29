@@ -27,7 +27,8 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated);
 
   const [cursor, setCursor] = React.useState("pointer");
 
@@ -89,6 +90,7 @@ const Navbar = () => {
                 </MenuItem>
               ))}
               {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+              <LogoutButton />
             </Menu>
           </Box>
           <Typography
@@ -123,6 +125,7 @@ const Navbar = () => {
               </Button>
             ))}
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+            <LogoutButton />
           </Box>
         </Toolbar>
       </Container>

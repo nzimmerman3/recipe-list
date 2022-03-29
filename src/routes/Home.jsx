@@ -19,6 +19,7 @@ function Home() {
       .catch((err) => {
         console.log(err);
       });
+    setRecipes(Recipes); //just for testing
   }, []);
 
   return (
