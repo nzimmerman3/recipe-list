@@ -5,10 +5,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const { user } = useAuth0();
+  console.log(user);
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
@@ -111,7 +114,7 @@ const RecipeForm = () => {
     if (isValid() && submit) {
       try {
         await axios
-          .post("http://localhost:3001/api", recipeInfo)
+          .post("http://localhost:3001/api/recipes", recipeInfo)
           .then(navigate("/recipe", { state: recipeInfo }));
       } catch (err) {
         console.log(err);
