@@ -27,7 +27,7 @@ const Navbar = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   console.log(isAuthenticated);
 
   const [cursor, setCursor] = React.useState("pointer");
@@ -77,12 +77,6 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {isAuthenticated ? (
-                <LogoutButton type="menu" />
-              ) : (
-                <LoginButton type="menu" />
-              )}
-
               {pages.map((page) => (
                 <MenuItem
                   key={page}
@@ -95,6 +89,11 @@ const Navbar = () => {
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
+              {isAuthenticated ? (
+                <LogoutButton type="menu" />
+              ) : (
+                <LoginButton type="menu" />
+              )}
             </Menu>
           </Box>
           <Typography
@@ -113,12 +112,19 @@ const Navbar = () => {
               flexGrow: 1,
               flexDirection: "row-reverse",
               display: { xs: "none", md: "flex" },
+              alignItems: "center",
             }}
           >
             {isAuthenticated ? (
               <LogoutButton type="expand" />
             ) : (
               <LoginButton type="expand" />
+            )}
+
+            {isAuthenticated ? (
+              <img className="navbar-profile" src={user.picture} />
+            ) : (
+              <div></div>
             )}
 
             {pages.map((page) => (

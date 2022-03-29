@@ -12,7 +12,6 @@ const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const { user } = useAuth0();
-  console.log(user);
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
@@ -22,8 +21,8 @@ const RecipeForm = () => {
     ingredients: [],
     image: "/images/Baked-Ziti.jpg",
     author: {
-      image: "/images/Nick-Zimmerman.jpg",
-      name: "",
+      image: user.picture,
+      name: user.name,
     },
     directions: [],
   });
