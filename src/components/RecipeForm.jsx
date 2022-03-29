@@ -7,6 +7,15 @@ import { Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import { useAuth0 } from "@auth0/auth0-react";
 
+/*
+email: "nicholaszimmerman1998@gmail.com"
+email_verified: false
+name: "Nick Zimmerman"
+nickname: "nicholaszimmerman1998"
+picture: "https://s.gravatar.com/avatar/a90e79c2da1e59122615c8271ba1b289?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fni.png"
+sub: "auth0|624233789ab76f006ae5b086"
+updated_at: "2022-03-29T15:06:29.913Z" */
+
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
