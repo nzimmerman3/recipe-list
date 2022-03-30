@@ -1,5 +1,19 @@
 [
   {
+    "_id": { "$oid": "62432214ba4b9c35a33adf1b" },
+    "name": "Bench Recipe",
+    "desc": "desc",
+    "time": "5",
+    "servings": "2",
+    "ingredients": ["i"],
+    "image": "/images/Baked-Ziti.jpg",
+    "author": {
+      "image": "https://lh3.googleusercontent.com/a/AATXAJzxGwnPUH2x6YKDowq6FVyzjNiDbU_-cPNUIYbB=s96-c",
+      "name": "Nicholas Zimmerman"
+    },
+    "directions": ["d"]
+  },
+  {
     "id": 1,
     "name": "Baked Ziti",
     "desc": "This bubbling baked ziti is perfect for feeding a crowd, and it freezes well too.",

@@ -32,8 +32,8 @@ const Navbar = () => {
   const [cursor, setCursor] = React.useState("pointer");
 
   return (
-    <AppBar className="Navbar">
-      <Container maxWidth="xl">
+    <AppBar>
+      <Container maxWidth="xl" className="navbar">
         <Toolbar disableGutters>
           <Typography
             variant="h6"

@@ -2,6 +2,10 @@
   min-height: 100vh;
 }
 
+.under-navbar {
+  margin-top: 12vh !important;
+}
+
 .recipe-image {
   object-fit: cover;
   height: 80vh;
@@ -23,6 +27,11 @@
 
 .recipe-direction {
   margin-bottom: 2vh;
+}
+
+.recipe-favorite-icon:hover {
+  color: #f44538;
+  transform: scale(1.1);
 }
 
 .footer {

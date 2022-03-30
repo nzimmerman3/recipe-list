@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import FoodHeader from "./FoodHeader";
 import FoodFooter from "./FoodFooter";
 
-const Recipe = (props) => {
+const RecipeCard = (props) => {
   return (
     <div>
       <Card>
@@ -14,4 +14,4 @@ const Recipe = (props) => {
   );
 };
 
-export default Recipe;
+export default RecipeCard;
