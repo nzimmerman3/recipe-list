@@ -3,12 +3,12 @@ import Card from "@mui/material/Card";
 import FoodHeader from "./FoodHeader";
 import FoodFooter from "./FoodFooter";
 
-const RecipeCard = (props) => {
+const RecipeCard = ({ recipe, favorites }) => {
   return (
     <div>
       <Card>
-        <FoodHeader recipe={props.recipe} />
-        <FoodFooter recipe={props.recipe} />
+        <FoodHeader recipe={recipe} />
+        <FoodFooter recipe={recipe} favorites={favorites} />
       </Card>
     </div>
   );
