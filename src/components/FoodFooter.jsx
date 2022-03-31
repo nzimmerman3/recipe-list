@@ -7,6 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 function FoodFooter({ recipe, favorites }) {
   //TODO check if recipe id is in favorites and adjust state accordingly
@@ -27,8 +28,18 @@ function FoodFooter({ recipe, favorites }) {
     }
   };
 
+  let navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState("#757575");
+
+  const params = { sort: "date", order: "newest" };
+
+  const goToPosts = () =>
+    navigate({
+      pathname: "/share",
+      search: `?${createSearchParams(params)}`,
+    });
 
   const handleClick = () => {
     setOpen(true);
@@ -50,7 +61,7 @@ function FoodFooter({ recipe, favorites }) {
     <CardActions>
       <Grid container spacing={2}>
         <Grid item xs={6} style={{ textAlign: "left" }}>
-          <Button size="small" style={{ color: "black" }}>
+          <Button size="small" style={{ color: "black" }} onClick={goToPosts}>
             Share
           </Button>
         </Grid>

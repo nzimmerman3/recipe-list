@@ -4,13 +4,21 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 function FoodHeader(props) {
   let navigate = useNavigate();
+  const params = { id: props.recipe.name };
   return (
     <CardActionArea
       onClick={() => navigate("/recipe", { state: props.recipe })}
+      //TODO change recipe to pull from api instead of using state
+      // onClick={() =>
+      //   navigate({
+      //     pathname: "/recipe",
+      //     search: `?${createSearchParams(params)}`,
+      //   })
+      // }
     >
       <CardMedia
         component="img"
