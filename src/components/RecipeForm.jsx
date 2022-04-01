@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -115,7 +115,13 @@ const RecipeForm = () => {
       try {
         await axios
           .post("http://localhost:3001/api/recipes", recipeInfo)
-          .then(navigate("/recipe", { state: recipeInfo }));
+          .then(({ data }) => {
+            const params = { id: data };
+            navigate({
+              pathname: "/recipe",
+              search: `?${createSearchParams(params)}`,
+            });
+          });
       } catch (err) {
         console.log(err);
       }
@@ -202,7 +208,6 @@ const RecipeForm = () => {
                   variant="outlined"
                   color="error"
                   onClick={() => {
-                    console.log(index);
                     setRecipeInfo((currRecipeInfo) => {
                       currRecipeInfo.ingredients.splice(index, 1);
                       return currRecipeInfo;
@@ -241,7 +246,6 @@ const RecipeForm = () => {
                   variant="outlined"
                   color="error"
                   onClick={() => {
-                    console.log(index);
                     setRecipeInfo((currRecipeInfo) => {
                       currRecipeInfo.directions.splice(index, 1);
                       return currRecipeInfo;

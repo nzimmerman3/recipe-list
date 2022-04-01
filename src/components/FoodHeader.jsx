@@ -8,17 +8,15 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 
 function FoodHeader(props) {
   let navigate = useNavigate();
-  const params = { id: props.recipe.name };
+  const params = { id: props.recipe._id };
   return (
     <CardActionArea
-      onClick={() => navigate("/recipe", { state: props.recipe })}
-      //TODO change recipe to pull from api instead of using state
-      // onClick={() =>
-      //   navigate({
-      //     pathname: "/recipe",
-      //     search: `?${createSearchParams(params)}`,
-      //   })
-      // }
+      onClick={() =>
+        navigate({
+          pathname: "/recipe",
+          search: `?${createSearchParams(params)}`,
+        })
+      }
     >
       <CardMedia
         component="img"
