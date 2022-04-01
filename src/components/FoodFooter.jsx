@@ -12,15 +12,13 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 function FoodFooter({ recipe, favorites }) {
   //TODO check if recipe id is in favorites and adjust state accordingly
   const { isAuthenticated, user } = useAuth0();
+  const [alertType, setAlertType] = useState("");
 
   const addToFavorites = () => {
-    console.log(recipe);
-
     if (!isAuthenticated) {
+      setAlertType("favorite");
       handleClick();
     } else {
-      console.log("Authenticated");
-      console.log(user);
       setColor((currColor) =>
         currColor === "#757575" ? "#f44538" : "#757575"
       );
@@ -33,14 +31,6 @@ function FoodFooter({ recipe, favorites }) {
   const [open, setOpen] = useState(false);
   const [color, setColor] = useState("#757575");
 
-  const params = { sort: "date", order: "newest" };
-
-  const goToPosts = () =>
-    navigate({
-      pathname: "/share",
-      search: `?${createSearchParams(params)}`,
-    });
-
   const handleClick = () => {
     setOpen(true);
   };
@@ -49,8 +39,14 @@ function FoodFooter({ recipe, favorites }) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
+  };
+
+  const share = () => {
+    const url = `${window.location}recipe?id=${recipe._id}`;
+    navigator.clipboard.writeText(url);
+    setAlertType("copy");
+    handleClick();
   };
 
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -61,7 +57,7 @@ function FoodFooter({ recipe, favorites }) {
     <CardActions>
       <Grid container spacing={2}>
         <Grid item xs={6} style={{ textAlign: "left" }}>
-          <Button size="small" style={{ color: "black" }} onClick={goToPosts}>
+          <Button size="small" style={{ color: "black" }} onClick={share}>
             Share
           </Button>
         </Grid>
@@ -77,9 +73,19 @@ function FoodFooter({ recipe, favorites }) {
         </Grid>
       </Grid>
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Please log in
-        </Alert>
+        {alertType === "favorite" ? (
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            Please log in
+          </Alert>
+        ) : (
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            URL copied to clipboard
+          </Alert>
+        )}
       </Snackbar>
     </CardActions>
   );
