@@ -275,10 +275,11 @@ const RecipeForm = () => {
             Add
           </Button>
         </div>
-
-        <Button variant="outlined" onClick={handleSubmit} color="success">
-          Save
-        </Button>
+        <div style={{ marginLeft: "8px" }}>
+          <Button variant="outlined" onClick={handleSubmit} color="success">
+            Save
+          </Button>
+        </div>
       </Box>
     </div>
   );
