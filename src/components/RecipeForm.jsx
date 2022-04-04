@@ -5,13 +5,19 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
-
+import { styled } from "@mui/material/styles";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const RecipeForm = () => {
   let navigate = useNavigate();
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const { user } = useAuth0();
+
+  const Input = styled("input")({
+    display: "none",
+  });
+
+  const [recipeImage, setRecipeImage] = useState(null);
 
   const [recipeInfo, setRecipeInfo] = useState({
     name: "",
@@ -275,7 +281,25 @@ const RecipeForm = () => {
             Add
           </Button>
         </div>
-        <div style={{ marginLeft: "8px" }}>
+        <label htmlFor="contained-button-file">
+          <Input
+            accept="image/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+            onChange={(event) =>
+              setRecipeImage(URL.createObjectURL(event.target.files[0]))
+            }
+          />
+          <div className="form-image" style={{ marginLeft: "8px" }}>
+            <Button variant="outlined" color="form" component="span">
+              Upload
+            </Button>
+          </div>
+        </label>
+        {recipeImage ? <img alt="Recipe" src={recipeImage}></img> : <div></div>}
+
+        <div style={{ marginLeft: "8px", marginTop: "8px" }}>
           <Button variant="outlined" onClick={handleSubmit} color="success">
             Save
           </Button>

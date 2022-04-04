@@ -9,7 +9,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Auth0ProviderWithHistory } from "./components/auth0-provider-with-history";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Profile from "./routes/Profile";
-import Share from "./routes/Share";
 
 function App() {
   const theme = createTheme({
@@ -30,7 +29,6 @@ function App() {
             <Routes>
               <Route exact path="/" element={<Home />}></Route>
               <Route path="/recipe" element={<Recipe />}></Route>
-              <Route path="/share" element={<Share />}></Route>
               <Route
                 path="/create"
                 element={<ProtectedRoute component={Create} />}

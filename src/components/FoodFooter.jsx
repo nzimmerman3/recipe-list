@@ -9,7 +9,7 @@ import MuiAlert from "@mui/material/Alert";
 import axios from "axios";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
-function FoodFooter({ recipe, favorites }) {
+function FoodFooter({ recipe, favorites, favorite }) {
   //TODO check if recipe id is in favorites and adjust state accordingly
   const { isAuthenticated, user } = useAuth0();
   const [alertType, setAlertType] = useState("");
@@ -29,7 +29,7 @@ function FoodFooter({ recipe, favorites }) {
   let navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
-  const [color, setColor] = useState("#757575");
+  const [color, setColor] = useState(favorite ? "#f44538" : "#757575");
 
   const handleClick = () => {
     setOpen(true);

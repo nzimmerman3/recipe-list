@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Directions from "../components/Directions";
-import { useLocation } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import Container from "@mui/material/Container";
 import CardMedia from "@mui/material/CardMedia";

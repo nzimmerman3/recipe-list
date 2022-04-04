@@ -27,9 +27,12 @@ function Home() {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .get("https://localhost:3001/api/favorites", { id: user.id })
+        .get("http://localhost:3001/api/favorites", {
+          params: { id: user.sub },
+        })
         .then(({ data }) => {
-          setFavorites(data);
+          setFavorites(data.favorites);
+          console.log(data.favorites);
         })
         .catch((err) => {
           console.log(err);
