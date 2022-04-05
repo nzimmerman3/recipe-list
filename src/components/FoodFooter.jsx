@@ -22,7 +22,15 @@ function FoodFooter({ recipe, favorites, favorite }) {
       setColor((currColor) =>
         currColor === "#757575" ? "#f44538" : "#757575"
       );
-      //TODO make api post call to add to list of favorites
+      try {
+        axios.put("http://localhost:3001/api/favorites", {
+          recipe: recipe._id,
+          user: user.sub,
+          favorite: color === "#757575",
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
